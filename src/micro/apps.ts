@@ -1,3 +1,5 @@
+import store from '@/store'
+
 const apps = [
   /**
    * name: 微应用名称 - 具有唯一性
@@ -6,11 +8,14 @@ const apps = [
    * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
    */
   {
-    name: "VueMicroApp",
-    entry: "//localhost:8111",
-    container: "#frame",
-    activeRule: "/vue"
+    name: 'VueMicroApp',
+    entry: '//localhost:8111',
+    container: '#frame',
+    activeRule: '/vue',
+    props: {
+      store
+    }
   }
-];
+]
 
-export default apps;
+export default apps

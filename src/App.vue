@@ -71,6 +71,11 @@ export default class App extends Vue {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  get token () {
+    return this.$store.state.token
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   mounted () {
     actions.onGlobalStateChange((state, prevState) => {
       // state: 变更后的状态; prevState: 变更前的状态
@@ -81,6 +86,7 @@ export default class App extends Vue {
     setTimeout(() => {
       const token = 'tokentokentokentoken'
       actions.setGlobalState({ token })
+      this.$store.commit('setToken', 'setToken')
     }, 3000)
   }
 }
