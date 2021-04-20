@@ -39,7 +39,6 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import MainMenu from '@/components/MainMenu.vue'
 import actions from '@/shared/actions'
-import bus from './plugins/bus'
 import busOn from './plugins/busOn'
 
 @Component({
@@ -85,6 +84,8 @@ export default class App extends Vue {
 
   // 采用Action通信的Token
   actionToken = ''
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  $bus: any
 
   get busToken (): string {
     return this.$store.state.tokenModule.token
@@ -115,7 +116,7 @@ export default class App extends Vue {
   setMainBusToken (): void {
     // 防止多次commit setToken，所以将commit setToken放在eventBus中去做，此处仅emit eventBus
     // this.$store.commit('tokenModule/setToken', 'mainBusToken')
-    bus.$emit('setBusToken', 'mainBusToken')
+    this.$bus.$emit('setBusToken', 'mainBusToken')
   }
 
   @Watch('busToken', { immediate: true })
