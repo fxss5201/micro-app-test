@@ -109,7 +109,8 @@ export default class App extends Vue {
   }
 
   setMainBusToken (): void {
-    this.$store.commit('setToken', 'mainBusToken')
+    // 防止多次commit setToken，所以将commit setToken放在eventBus中去做，此处仅emit eventBus
+    // this.$store.commit('setToken', 'mainBusToken')
     bus.$emit('setBusToken', 'mainBusToken')
   }
 
