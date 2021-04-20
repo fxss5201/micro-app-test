@@ -1,4 +1,4 @@
-import bus from '@/plugins/bus.js'
+import bus from './../plugins/bus'
 
 const apps = [
   /**

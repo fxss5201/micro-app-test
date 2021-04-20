@@ -15,11 +15,11 @@
             <el-button size="mini" @click="setMainAtionToken">设置actionToken为mainAtionToken</el-button>
           </div>
           <div class="head-content">
-            <span>主应用Props(vuex)通信:</span>
+            <span>主应用Props(bus)通信:</span>
             <el-divider direction="vertical"></el-divider>
-            <span>vuexToken: {{ vuexToken }}</span>
+            <span>busToken: {{ busToken }}</span>
             <el-divider direction="vertical"></el-divider>
-            <el-button size="mini" @click="setMainVuexToken">设置vuexToken为mainVuexToken</el-button>
+            <el-button size="mini" @click="setMainBusToken">设置busToken为mainBusToken</el-button>
           </div>
         </el-header>
         <el-main>
@@ -39,6 +39,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import MainMenu from '@/components/MainMenu.vue'
 import actions from '@/shared/actions'
+import bus from './plugins/bus'
 
 @Component({
   components: {
@@ -84,7 +85,7 @@ export default class App extends Vue {
   // 采用Action通信的Token
   actionToken = ''
 
-  get vuexToken (): string {
+  get busToken (): string {
     return this.$store.state.token
   }
 
@@ -97,18 +98,23 @@ export default class App extends Vue {
       console.log('主应用观察者：改变后的 token 的值为 ', state.token)
       this.actionToken = state.token
     }, true)
+
+    bus.$on('setBusToken', (val: string) => {
+      this.$store.commit('setToken', val)
+    })
   }
 
   setMainAtionToken (): void {
     actions.setGlobalState({ token: 'mainAtionToken' })
   }
 
-  setMainVuexToken (): void {
-    this.$store.commit('setToken', 'mainVuexToken')
+  setMainBusToken (): void {
+    this.$store.commit('setToken', 'mainBusToken')
+    bus.$emit('setBusToken', 'mainBusToken')
   }
 
-  @Watch('vuexToken', { immediate: true })
-  onVuexTokenChange (val: string, oldVal: string): void {
+  @Watch('busToken', { immediate: true })
+  onBusTokenChange (val: string, oldVal: string): void {
     // vuex中token值: val变更后的状态; oldVal: 变更前的状态
     console.log('主应用vuex中token值改变前的值为 ', oldVal)
     console.log('主应用vuex中token值改变后的值为 ', val)
