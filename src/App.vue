@@ -86,7 +86,7 @@ export default class App extends Vue {
   actionToken = ''
 
   get busToken (): string {
-    return this.$store.state.token
+    return this.$store.state.tokenModule.token
   }
 
   mounted (): void {
@@ -100,7 +100,7 @@ export default class App extends Vue {
     }, true)
 
     bus.$on('setBusToken', (val: string) => {
-      this.$store.commit('setToken', val)
+      this.$store.commit('tokenModule/setToken', val)
     })
   }
 
@@ -110,7 +110,7 @@ export default class App extends Vue {
 
   setMainBusToken (): void {
     // 防止多次commit setToken，所以将commit setToken放在eventBus中去做，此处仅emit eventBus
-    // this.$store.commit('setToken', 'mainBusToken')
+    // this.$store.commit('tokenModule/setToken', 'mainBusToken')
     bus.$emit('setBusToken', 'mainBusToken')
   }
 
