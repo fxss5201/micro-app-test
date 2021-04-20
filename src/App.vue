@@ -40,6 +40,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import MainMenu from '@/components/MainMenu.vue'
 import actions from '@/shared/actions'
 import bus from './plugins/bus'
+import busOn from './plugins/busOn'
 
 @Component({
   components: {
@@ -99,9 +100,12 @@ export default class App extends Vue {
       this.actionToken = state.token
     }, true)
 
-    bus.$on('setBusToken', (val: string) => {
-      this.$store.commit('tokenModule/setToken', val)
-    })
+    // bus.$on('setBusToken', (val: string) => {
+    //   this.$store.commit('tokenModule/setToken', val)
+    // })
+
+    // 多个eventBus统一书写地方
+    busOn.install(this)
   }
 
   setMainAtionToken (): void {
