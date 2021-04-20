@@ -1,4 +1,4 @@
-import store from '@/store'
+import bus from '@/plugins/bus.js'
 
 const apps = [
   /**
@@ -13,7 +13,7 @@ const apps = [
     container: '#frame',
     activeRule: '/vue',
     props: {
-      store
+      bus
     }
   }
 ]
