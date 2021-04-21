@@ -5,7 +5,7 @@ export default {
   },
   mutations: {
     setToken (state: any, val: string) {
-      console.log(val)
+      console.log('main', val)
       state.token = val
     }
   },
