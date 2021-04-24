@@ -1,5 +1,3 @@
-import bus from './../plugins/bus'
-
 const apps = [
   /**
    * name: 微应用名称 - 具有唯一性
@@ -12,9 +10,7 @@ const apps = [
     entry: '//localhost:8111',
     container: '#frame',
     activeRule: '/vue',
-    props: {
-      bus
-    }
+    props: {}
   }
 ]
 

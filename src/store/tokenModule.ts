@@ -4,7 +4,7 @@ export default {
     token: 'store123456'
   },
   mutations: {
-    setToken (state: any, val: string) {
+    setToken (state: any, val: string): void {
       console.log('main', val)
       state.token = val
     }
